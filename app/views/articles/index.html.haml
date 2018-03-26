@@ -1,0 +1,36 @@
+.container
+  .row
+    .col-md-8.col-sm-12.col-md-offset-2
+      .text-center
+        %small
+          Refreshes automatically.
+          Last update was
+          = time_ago_in_words(@articles.last.updated_at)
+          ago.
+      %h3.text-center Direct link builder for Elevio help docs
+      %p.text-center Send a user to a page in Path and simultaneously launch any help doc.
+      %hr
+      %ul
+        %li
+          %strong
+            Use the 'Add Param' when there's already a ? in the URL, like:
+          pathlms.com/CLIENT/profile?tab=live_events
+        %li
+          %strong
+            Use the 'Only Param' when there is no ? in the URL, like:
+          pathlms.com/CLIENT/account/edit#reports
+      .table-responsive
+        %table.table
+          %thead
+            %tr
+              %th Article Name
+              %th.text-right Only param
+              %th.text-right Add Param
+
+
+          %tbody
+            - @articles.each do |article|
+              %tr
+                %td= article.name
+                %td.text-right= "?data-elevio-article=#{article.elevio_id}"
+                %td.text-right= "&data-elevio-article=#{article.elevio_id}"
